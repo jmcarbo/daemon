@@ -11,6 +11,9 @@ import (
 
 // Get the daemon properly
 func newDaemon(name, description string) (Daemon, error) {
+  if _, err := os.Stat("/usr/bin/sv"); err == nil {
+    return &runitRecord{name, description}, nil
+  }
 	if _, err := os.Stat("/run/systemd/system"); err == nil {
 		return &systemDRecord{name, description}, nil
 	}

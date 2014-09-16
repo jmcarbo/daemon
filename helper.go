@@ -30,6 +30,10 @@ func checkPrivileges() bool {
 
 	if user, err := user.Current(); err == nil && user.Gid == "0" {
 		return true
-	}
+	} else {
+    if err != nil {
+      return true
+    }
+  }
 	return false
 }
